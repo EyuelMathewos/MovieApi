@@ -22,10 +22,9 @@
   },
   "MongoStorage": {
     "name": "MongoStorage",
-    "connector":"loopback-component-storage-mongo",
+    "connector":"loopback-component-storage-mongo-gridfs",
     "host": "localhost",
     "port": "27017",
-    "database": "MovieSource",
-    "provider": "filestore-mongo"
+    "database": "MovieSource"
      }
 }
