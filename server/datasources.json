@@ -6,13 +6,15 @@
   "MovieSource": {
     "host": "localhost",
     "port": 27017,
-    "url": "",
+    "url": "mongodb+srv://cluster0.da5ri.mongodb.net",
     "database": "MovieSource",
-    "password": "",
+    "user": "MovieDBUser",
+    "password": "SvxWjNnwqb6H8qwL",
     "name": "MovieSource",
-    "user": "",
+    "connector": "mongodb",
     "useNewUrlParser": true,
-    "connector": "mongodb"
+    "useCreateIndex": true,
+    "useUnifiedTopology": true
   },
   "Storage": {
     "name": "Storage",
