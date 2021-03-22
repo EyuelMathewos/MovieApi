@@ -16,12 +16,6 @@
     "useCreateIndex": true,
     "useUnifiedTopology": true
   },
-  "Storage": {
-    "name": "Storage",
-    "connector": "loopback-component-storage",
-    "provider": "filesystem",
-    "root": "./Storage"
-  },
   "MongoStorage": {
     "host": "localhost",
     "port": "27017",
