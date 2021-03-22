@@ -4,35 +4,57 @@
 // License text available at https://opensource.org/licenses/MIT
 
 'use strict';
-var mongoose = require('mongoose');
-var gridfs = require('gridfs-stream');
-var fs = require('fs');
+const assert = require('assert');
+const mongodb = require('mongodb');
+const ObjectID = require('mongodb').ObjectID;
+
+
 module.exports = function(server) {
   // Install a `/` route that returns server status
   const router = server.loopback.Router();
   router.get('/', server.loopback.status());
-  mongoose.connect('mongodb://localhost:27017/MovieSource', { useNewUrlParser: true }).then(() => console.log("Mongodb connected"))
-  .catch(err => console.log(err));
-  mongoose.Promise = global.Promise;
-  gridfs.mongo = mongoose.mongo;
-  var connection = mongoose.connection;
-  connection.on('error', console.error.bind(console, 'connection error:'));
-  connection.once('open', function () {
-  var gfs = gridfs(connection.db);
-  router.get('/read/:id', function (req, res) {
+
+  const uri = 'mongodb://localhost:27017';
+const dbName = 'MovieSource';
+
+const client = new mongodb.MongoClient(uri,{ 
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
+client.connect(function(error) {
+  assert.ifError(error);
+
+  const db = client.db(dbName);
+console.log("the outer is working");
+
+
+  router.get('/read/:trackID', function (req, res) {
       // Check file exist on MongoDB
-      console.log(req);
-      console.log("this is cunck of data")
-      gfs.exist({ '_id': req.params.id }, function (err, file) {
-          if (err || !file) {
-              res.send('File Not Found');
-          } else {
-              res.set('content-type', 'video/mp4');
-              res.set('accept-ranges', 'bytes');
-              var readstream = gfs.createReadStream({  '_id': req.params.id });
-              readstream.pipe(res);
-          }
-      });
+      try {
+        console.log('working');
+      var trackID = new ObjectID(req.params.trackID);
+    } catch(err) {
+      return res.status(400).json({ message: "Invalid trackID in URL parameter. Must be a single String of 12 bytes or a string of 24 hex characters" }); 
+    }
+    res.set('content-type', 'video/mp4');
+    res.set('accept-ranges', 'bytes');
+  
+    let bucket = new mongodb.GridFSBucket(db);
+  
+    let downloadStream = bucket.openDownloadStream(trackID);
+  
+    downloadStream.on('data', (chunk) => {
+      res.write(chunk);
+    });
+  
+    downloadStream.on('error', () => {
+      res.sendStatus(404);
+    });
+  
+    downloadStream.on('end', () => {
+      res.end();
+    });
 
   });
   

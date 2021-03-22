@@ -13,9 +13,6 @@
       "./mixins"
     ]
   },
-  "User": {
-    "dataSource": "db"
-  },
   "AccessToken": {
     "dataSource": "db",
     "public": false
@@ -41,6 +38,10 @@
   },
   "container": {
     "dataSource": "MongoStorage",
+    "public": true
+  },
+  "Account": {
+    "dataSource": "MovieSource",
     "public": true
   }
 }
