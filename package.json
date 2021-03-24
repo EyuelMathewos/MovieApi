@@ -7,7 +7,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "start": "node .",
+    "start": "node . --env production",
     "posttest": "npm run lint"
   },
   "dependencies": {
