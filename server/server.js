@@ -26,6 +26,7 @@ app.start = function() {
 // Bootstrap the application, configure models, datasources and middleware.
 // Sub-apps like REST API are mounted via boot scripts.
 boot(app, __dirname, function(err) {
+    app.set("port", process.env.PORT);
   if (err) throw err;
 
   // start the server if `$ node server.js`
