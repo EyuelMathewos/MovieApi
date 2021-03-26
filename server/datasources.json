@@ -19,6 +19,7 @@
   "MongoStorage": {
     "host": "localhost",
     "port": "27017",
+    "url": "mongodb+srv://cluster0.da5ri.mongodb.net",
     "database": "MovieSource",
     "name": "MongoStorage",
     "connector": "loopback-component-storage-mongo-gridfs"
