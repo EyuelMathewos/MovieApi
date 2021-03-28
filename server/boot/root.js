@@ -14,8 +14,7 @@ module.exports = function(server) {
   const router = server.loopback.Router();
   router.get('/', server.loopback.status());
 
-  const uri = 'mongodb+srv://cluster0.da5ri.mongodb.net/MovieSource';
-const dbName = 'MovieSource';
+  const uri = 'mongodb+srv://MovieDBUser:SvxWjNnwqb6H8qwL@cluster0.da5ri.mongodb.net/MovieSource?retryWrites=true&w=majority';
 
 const client = new mongodb.MongoClient(uri,{ 
     useNewUrlParser: true,
@@ -25,8 +24,7 @@ const client = new mongodb.MongoClient(uri,{
 client.connect(function(error) {
   assert.ifError(error);
 
-  const db = client.db(dbName);
-console.log("the outer is working");
+  console.log("the outer is working");
 
 
   router.get('/read/:trackID', function (req, res) {
