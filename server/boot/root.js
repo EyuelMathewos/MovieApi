@@ -15,7 +15,7 @@ module.exports = function(server) {
   router.get('/', server.loopback.status());
 
   const uri = 'mongodb+srv://MovieDBUser:SvxWjNnwqb6H8qwL@cluster0.da5ri.mongodb.net/MovieSource?retryWrites=true&w=majority';
-
+  const dbName = 'MovieSource';
 const client = new mongodb.MongoClient(uri,{ 
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -23,7 +23,7 @@ const client = new mongodb.MongoClient(uri,{
 
 client.connect(function(error) {
   assert.ifError(error);
-
+  const db = client.db(dbName);
   console.log("the outer is working");
 
 
