@@ -6,11 +6,7 @@
   "MovieSource": {
     "host": "localhost",
     "port": 27017,
-    "url": "mongodb+srv://cluster0.da5ri.mongodb.net",
-    "database": "MovieSource",
-    "user": "MovieDBUser",
-    "password": "SvxWjNnwqb6H8qwL",
-    "name": "MovieSource",
+    "url": "mongodb+srv://MovieDBUser:SvxWjNnwqb6H8qwL@cluster0.da5ri.mongodb.net/MovieSource?retryWrites=true&w=majority",
     "connector": "mongodb",
     "useNewUrlParser": true,
     "useCreateIndex": true,
@@ -19,8 +15,7 @@
   "MongoStorage": {
     "host": "localhost",
     "port": "27017",
-    "url": "mongodb+srv://cluster0.da5ri.mongodb.net",
-    "database": "MovieSource",
+    "url": "mongodb+srv://MovieDBUser:SvxWjNnwqb6H8qwL@cluster0.da5ri.mongodb.net/MovieSource?retryWrites=true&w=majority",
     "name": "MongoStorage",
     "connector": "loopback-component-storage-mongo-gridfs"
   }
