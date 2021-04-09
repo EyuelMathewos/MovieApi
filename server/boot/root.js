@@ -43,11 +43,11 @@ client.connect(function(error) {
     const videoSize = metadata.length;
     const end = videoSize - 1;
 
-    const contentLength = end + 1;
+    const contentLength = videoSize + 1;
     const headers = {
-      "Content-Range": `bytes ${end}/${videoSize}`,
+      "Content-Range": `bytes ${0}-${end}/${videoSize}`,
       "Accept-Ranges": "bytes",
-       "Content-Length": videoSize ,
+      "Content-Length": contentLength,
       "Content-Type": "video/mp4",
     };
 
