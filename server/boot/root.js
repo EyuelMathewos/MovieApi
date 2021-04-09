@@ -28,15 +28,31 @@ client.connect(function(error) {
 
 
   router.get('/read/:trackID', function (req, res) {
+       let metadata={};
       // Check file exist on MongoDB
       try {
         console.log('working');
       var trackID = new ObjectID(req.params.trackID);
+      db.collection('fs.files').findOne({"_id": trackID}, (err, video) => {
+        if (err) throw err;
+        metadata = video;
+       });
     } catch(err) {
       return res.status(400).json({ message: "Invalid trackID in URL parameter. Must be a single String of 12 bytes or a string of 24 hex characters" }); 
     }
-    res.set('content-type', 'video/mp4');
-    res.set('accept-ranges', 'bytes');
+    const videoSize = metadata.length;
+    const end = videoSize - 1;
+
+    const contentLength = end + 1;
+    const headers = {
+      "Content-Range": `bytes ${end}/${videoSize}`,
+      "Accept-Ranges": "bytes",
+      "Content-Length": contentLength,
+      "Content-Type": "video/mp4",
+    };
+
+
+    res.set( headers );
   
     let bucket = new mongodb.GridFSBucket(db);
   
