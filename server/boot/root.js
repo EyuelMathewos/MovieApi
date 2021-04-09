@@ -40,14 +40,14 @@ client.connect(function(error) {
     } catch(err) {
       return res.status(400).json({ message: "Invalid trackID in URL parameter. Must be a single String of 12 bytes or a string of 24 hex characters" }); 
     }
-    const videoSize = metadata.length + 1;
+    const videoSize = metadata.chunkSize + 1;
     const end = videoSize - 1;
 
     const contentLength = videoSize + 1;
     const headers = {
       "Content-Range": `bytes ${0}-${end}/${videoSize}`,
       "Accept-Ranges": "bytes",
-      "Content-Length": metadata.chunkSize,
+      "Content-Length": videoSize,
       "Content-Type": "video/mp4",
     };
 
