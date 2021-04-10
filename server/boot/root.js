@@ -45,7 +45,7 @@ client.connect(function(error) {
 
     //const contentLength = ;
     const headers = {
-      "Content-Range": `bytes ${0}-${end}/${videoSize}`,
+     // "Content-Range": `bytes ${0}-${end}/${videoSize}`,
       "Accept-Ranges": "bytes",
       "Content-Length": 306,
       "Content-Type": "video/mp4",
