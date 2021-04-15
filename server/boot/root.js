@@ -52,7 +52,8 @@ client.connect(function(error) {
     };
 
 
-    res.set( headers );
+    res.set('content-type', 'video/mp4');
+    res.set('accept-ranges', 'bytes');
   
     let bucket = new mongodb.GridFSBucket(db);
   
