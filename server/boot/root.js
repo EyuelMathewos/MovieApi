@@ -51,7 +51,7 @@ client.connect(function(error) {
       "Content-Type": "video/mp4",
     };
 
-
+    console.log(req.range());
     res.set('content-type', 'video/mp4');
     res.set('accept-ranges', 'bytes');
   
