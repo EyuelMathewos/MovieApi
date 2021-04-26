@@ -59,17 +59,8 @@ client.connect(function(error) {
   
     let downloadStream = bucket.openDownloadStream(trackID);
   
-    downloadStream.on('data', (chunk) => {
-      res.write(chunk);
-    });
-  
-    downloadStream.on('error', () => {
-      res.sendStatus(404);
-    });
-  
-    downloadStream.on('end', () => {
-      res.end();
-    });
+    downloadStream.pipe(res);
+
 
   });
   
