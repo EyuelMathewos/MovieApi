@@ -50,19 +50,17 @@ client.connect(function(error) {
       "Content-Length": 3964664,
       "Content-Type": "video/mp4",
     };
-    
-    console.log(req.get('Range'));
+
     console.log(req.range());
     res.set('content-type', 'video/mp4');
     res.set('accept-ranges', 'bytes');
-    res.status(206);
   
     let bucket = new mongodb.GridFSBucket(db);
   
     let downloadStream = bucket.openDownloadStream(trackID);
   
     downloadStream.on('data', (chunk) => {
-      res.pipe(res);
+      res.write(chunk);
     });
   
     downloadStream.on('error', () => {
