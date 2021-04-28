@@ -48,13 +48,15 @@ client.connect(function(error) {
       "Content-Range": `bytes ${0}-${end}/${videoSize}`,
       "Accept-Ranges": "bytes",
       "Content-Length": 3964664,
-      "Content-Type": "video/mp4",
+      "Content-Type": "video/mp4"
     };
+    
 
     console.log(req.range());
 //      res.set('content-type', 'video/mp4');
 //      res.set('accept-ranges', 'bytes');
 //     res.status(206);
+    res.writeHead(206, headers);
   
     let bucket = new mongodb.GridFSBucket(db);
   
