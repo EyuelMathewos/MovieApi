@@ -63,7 +63,10 @@ client.connect(function(error) {
   
     let downloadStream = bucket.openDownloadStream(trackID);
   
-    downloadStream.pipe(res);
+   // downloadStream.pipe(res);
+      downloadStream.on('data', () => {
+      downloadStream.push(res);
+      })
 
 
   });
