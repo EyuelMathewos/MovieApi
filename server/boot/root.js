@@ -50,7 +50,8 @@ client.connect(function(error) {
       "Content-Length": 3964664,
       "Content-Type": "video/mp4",
     };
-
+    
+    console.log("range: **************---");
     console.log(req.range());
 //     res.set('content-type', 'video/mp4');
 //     res.set('accept-ranges', 'bytes');
