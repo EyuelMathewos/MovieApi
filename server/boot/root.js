@@ -51,8 +51,7 @@ client.connect(function(error) {
       "Content-Type": "video/mp4",
     };
     
-    console.log("range: **************---");
-    console.log(req.range());
+
 //     res.set('content-type', 'video/mp4');
 //     res.set('accept-ranges', 'bytes');
     res.setHeader("accept-ranges", "bytes");
@@ -66,6 +65,8 @@ client.connect(function(error) {
    // downloadStream.pipe(res);
       downloadStream.on('data', () => {
       downloadStream.push(res);
+       console.log("range: **************---");
+       console.log(req.range());
       })
 
 
