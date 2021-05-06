@@ -30,13 +30,16 @@ client.connect(function(error) {
   router.get('/read/:trackID', function (req, res) {
        let metadata={};
       // Check file exist on MongoDB
+     console.log("range: **************---");
+     console.log(req.headers.range);
+
       try {
         console.log('working');
       var trackID = new ObjectID(req.params.trackID);
-      db.collection('fs.files').findOne({"_id": trackID}, (err, video) => {
-        if (err) throw err;
-        metadata = video;
-       });
+//       db.collection('fs.files').findOne({"_id": trackID}, (err, video) => {
+//         if (err) throw err;
+//         metadata = video;
+//        });
     } catch(err) {
       return res.status(400).json({ message: "Invalid trackID in URL parameter. Must be a single String of 12 bytes or a string of 24 hex characters" }); 
     }
@@ -62,13 +65,10 @@ client.connect(function(error) {
   
     let downloadStream = bucket.openDownloadStream(trackID);
   
-   // downloadStream.pipe(res);
-      downloadStream.on('data', () => {
-      downloadStream.push(res);
-       console.log("range: **************---");
-       console.log(req.range());
-      })
+    downloadStream.pipe(res);
 
+//        console.log("range: **************---");
+//        console.log(req.range());
 
   });
   
