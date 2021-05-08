@@ -29,9 +29,11 @@ client.connect(function(error) {
 
   router.get('/read/:trackID', function (req, res) {
        let metadata={};
+       let video={};
       // Check file exist on MongoDB
      console.log("range: **************---");
      console.log(req.headers.range);
+    const range = req.headers.range;
 
       try {
         console.log('working');
@@ -40,10 +42,11 @@ client.connect(function(error) {
 //         if (err) throw err;
 //         metadata = video;
 //        });
-      db.collection('fs.files').find({ _id : trackID }).toArray(function(err, video) {
+      db.collection('fs.files').find({ _id : trackID }).toArray(function(err, res) {
           assert.equal(err, null);
           console.log('*******Find Video Detial');
-          console.log(video);
+           video= res;
+          console.log(res);
        });
         
         
@@ -52,24 +55,43 @@ client.connect(function(error) {
     } catch(err) {
       return res.status(400).json({ message: "Invalid trackID in URL parameter. Must be a single String of 12 bytes or a string of 24 hex characters" }); 
     }
-    const videoSize = metadata.length;
-    const end = videoSize - 1;
+//     const videoSize = metadata.length;
+//     const end = videoSize - 1;
 
-    //const contentLength = ;
-    const headers = {
-      "Content-Range": `bytes ${0}-${end}/${videoSize}`,
-      "Accept-Ranges": "bytes",
-      "Content-Length": 3964664,
-      "Content-Type": "video/mp4",
-    };
+//     //const contentLength = ;
+//     const headers = {
+//       "Content-Range": `bytes ${0}-${end}/${videoSize}`,
+//       "Accept-Ranges": "bytes",
+//       "Content-Length": 3964664,
+//       "Content-Type": "video/mp4",
+//     };
     
 
 //     res.set('content-type', 'video/mp4');
 //     res.set('accept-ranges', 'bytes');
-    res.setHeader("accept-ranges", "bytes");
-    res.setHeader("content-length", 3964664);
+    
+//     res.setHeader("accept-ranges", "bytes");
+//     res.setHeader("content-length", 3964664);
+    
 //     res.status(206);
   
+    
+      const videoSize = video.length;
+      const start = Number(range.replace(/\D/g, ""));
+      const end = videoSize - 1;
+
+      const contentLength = end - start + 1;
+      const headers = {
+        "Content-Range": `bytes ${start}-${end}/${videoSize}`,
+        "Accept-Ranges": "bytes",
+        "Content-Length": contentLength,
+        "Content-Type": "video/mp4",
+      };
+
+      // HTTP Status 206 for Partial Content
+      res.writeHead(206, headers);
+    
+    
     let bucket = new mongodb.GridFSBucket(db);
   
     let downloadStream = bucket.openDownloadStream(trackID);
