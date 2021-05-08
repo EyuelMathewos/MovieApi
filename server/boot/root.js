@@ -47,6 +47,7 @@ client.connect(function(error) {
           console.log('*******Find Video Detial');
            video= res;
           console.log(res);
+          console.log(video.length);
        });
         
         
