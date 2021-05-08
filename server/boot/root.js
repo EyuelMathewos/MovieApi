@@ -90,7 +90,16 @@ client.connect(function(error) {
       };
       console.log(headers);
       // HTTP Status 206 for Partial Content
-      res.setHeader(headers);
+      //res.setHeader(headers);
+    
+    
+    //     res.set('content-type', 'video/mp4');
+    //     res.set('accept-ranges', 'bytes');
+    res.setHeader("accept-ranges", "bytes");
+    res.setHeader("content-length", 3964664);
+    //     res.status(206);
+    
+    
     
     
     let bucket = new mongodb.GridFSBucket(db);
