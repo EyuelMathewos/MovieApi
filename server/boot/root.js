@@ -48,6 +48,24 @@ client.connect(function(error) {
            video= res[0];
           console.log(res);
           console.log(video.length);
+        
+        const videoSize = video.length;
+      const start = Number(range.replace(/\D/g, ""));
+      const end = videoSize - 1;
+
+      const contentLength = end - start + 1;
+      const headers = {
+        "Content-Range": `bytes ${start}-${end}/${videoSize}`,
+        "Accept-Ranges": "bytes",
+        "Content-Length": contentLength,
+        "Content-Type": "video/mp4",
+      };
+      console.log(headers);
+      // HTTP Status 206 for Partial Content
+      //res.setHeader(headers);
+        
+        
+        
        });
         
         
@@ -77,26 +95,13 @@ client.connect(function(error) {
 //     res.status(206);
   
     
-      const videoSize = video.length;
-      const start = Number(range.replace(/\D/g, ""));
-      const end = videoSize - 1;
-
-      const contentLength = end - start + 1;
-      const headers = {
-        "Content-Range": `bytes ${start}-${end}/${videoSize}`,
-        "Accept-Ranges": "bytes",
-        "Content-Length": contentLength,
-        "Content-Type": "video/mp4",
-      };
-      console.log(headers);
-      // HTTP Status 206 for Partial Content
-      //res.setHeader(headers);
+      
     
     
     //     res.set('content-type', 'video/mp4');
     //     res.set('accept-ranges', 'bytes');
     res.setHeader("accept-ranges", "bytes");
-    res.setHeader("content-length", 3964664);
+    //res.setHeader("content-length", 3964664);
     //     res.status(206);
     
     
