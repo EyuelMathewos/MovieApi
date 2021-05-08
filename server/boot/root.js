@@ -90,7 +90,7 @@ client.connect(function(error) {
       };
 
       // HTTP Status 206 for Partial Content
-      res.writeHead(headers);
+      res.setHeader(headers);
     
     
     let bucket = new mongodb.GridFSBucket(db);
