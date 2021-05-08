@@ -45,7 +45,7 @@ client.connect(function(error) {
       db.collection('fs.files').find({ _id : trackID }).toArray(function(err, res) {
           assert.equal(err, null);
           console.log('*******Find Video Detial');
-           video= res;
+           video= res[0];
           console.log(res);
           console.log(video.length);
        });
