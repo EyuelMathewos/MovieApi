@@ -40,7 +40,7 @@ client.connect(function(error) {
 //         if (err) throw err;
 //         metadata = video;
 //        });
-      db.collection.find({ _id : req.params.trackID }).toArray(function(err, video) {
+      db.collection.find({ _id : "60788fb914a3570015e0237b" }).toArray(function(err, video) {
           assert.equal(err, null);
           console.log('*******Find Video Detial');
           console.log(video);
