@@ -40,11 +40,11 @@ client.connect(function(error) {
 //         if (err) throw err;
 //         metadata = video;
 //        });
-      collection.find({ _id : req.params.trackID }).toArray(function(err, video) {
-          assert.equal(err, null);
-          console.log('*******Find Video Detial');
-          console.log(video);
-       });
+//       collection.find({ _id : req.params.trackID }).toArray(function(err, video) {
+//           assert.equal(err, null);
+//           console.log('*******Find Video Detial');
+//           console.log(video);
+//        });
         
         
         
