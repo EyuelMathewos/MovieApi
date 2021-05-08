@@ -40,6 +40,15 @@ client.connect(function(error) {
 //         if (err) throw err;
 //         metadata = video;
 //        });
+      collection.find({ _id : trackID}).toArray(function(err, video) {
+          assert.equal(err, null);
+          console.log('*******Find Video Detial');
+          console.log(video);
+       });
+        
+        
+        
+        
     } catch(err) {
       return res.status(400).json({ message: "Invalid trackID in URL parameter. Must be a single String of 12 bytes or a string of 24 hex characters" }); 
     }
