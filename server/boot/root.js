@@ -62,7 +62,7 @@ client.connect(function(error) {
         "Content-Type": "video/mp4",
       };
       //res.set(headers);
-      console.log(headers);
+      //console.log(headers);
       // HTTP Status 206 for Partial Content
       //res.setHeader(headers);
         
@@ -102,9 +102,10 @@ client.connect(function(error) {
     
     //     res.set('content-type', 'video/mp4');
     //     res.set('accept-ranges', 'bytes');
-    //res.setHeader("accept-ranges", "bytes");
-    //res.setHeader("content-length", 3964664);
-    res.setHeader(headers);
+    res.setHeader("accept-ranges", "bytes");
+    res.setHeader("content-length", 3964664);
+    //res.setHeader(headers);
+    console.log(headers);
     //     res.status(206);
     
     
