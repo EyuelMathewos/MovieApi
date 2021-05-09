@@ -106,7 +106,7 @@ client.connect(function(error) {
     res.setHeader("content-length", 10445411);
     //res.setHeader(headers);
     console.log(headers);
-    //res.status(206);
+    res.status(206);
     
     
     
