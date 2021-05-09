@@ -100,7 +100,7 @@ client.connect(function(error) {
       
     
     
-    //     res.set('content-type', 'video/mp4');
+    res.setHeader('content-type', 'video/mp4');
     //     res.set('accept-ranges', 'bytes');
     res.setHeader("accept-ranges", "bytes");
     res.setHeader("content-length", 10445411);
