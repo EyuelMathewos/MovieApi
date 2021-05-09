@@ -30,6 +30,7 @@ client.connect(function(error) {
   router.get('/read/:trackID', function (req, res) {
        let metadata={};
        let video={};
+       let headers={};
       // Check file exist on MongoDB
      console.log("range: **************---");
      console.log(req.headers.range);
@@ -54,7 +55,7 @@ client.connect(function(error) {
       const end = videoSize - 1;
 
       const contentLength = end - start + 1;
-      const headers = {
+      headers = {
         "Content-Range": `bytes ${start}-${end}/${videoSize}`,
         "Accept-Ranges": "bytes",
         "Content-Length": contentLength,
@@ -101,9 +102,9 @@ client.connect(function(error) {
     
     //     res.set('content-type', 'video/mp4');
     //     res.set('accept-ranges', 'bytes');
-    res.setHeader("accept-ranges", "bytes");
-    res.setHeader("content-length", 3964664);
-    //res.setHeader(headers);
+    //res.setHeader("accept-ranges", "bytes");
+    //res.setHeader("content-length", 3964664);
+    res.setHeader(headers);
     //console.log(headers);
     //     res.status(206);
     
