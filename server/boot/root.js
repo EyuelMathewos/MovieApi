@@ -60,7 +60,7 @@ client.connect(function(error) {
         "Content-Length": contentLength,
         "Content-Type": "video/mp4",
       };
-      res.setHeader(headers);
+      res.set(headers);
       console.log(headers);
       // HTTP Status 206 for Partial Content
       //res.setHeader(headers);
