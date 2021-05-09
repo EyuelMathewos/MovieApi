@@ -94,7 +94,7 @@ client.connect(function(error) {
 //     res.setHeader("accept-ranges", "bytes");
 //     res.setHeader("content-length", 3964664);
     
-       res.status(206);
+//     res.status(206);
   
     
       
